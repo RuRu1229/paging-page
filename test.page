@@ -1,0 +1,44 @@
+<apex:page standardController="Bond_Offering__c" extensions="bondOfferingService">
+    <apex:form >
+    <apex:outputtext value="{!bondsDetail}"></apex:outputtext> 
+   
+        <apex:pageBlock title="Bond Offering Builder">
+         <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save" /><apex:commandButton action="{!cancel}" value="Cancel" />
+            </apex:pageBlockButtons>
+    
+            <apex:pageBlockSection title="Bond Offering Details">
+                   
+                <apex:inputField value="{!Bond_Offering__c.Name}" /><apex:inputField value="{!Bond_Offering__c.Clients__c}"/>
+                <apex:inputField value="{!Bond_Offering__c.Sales_Rep__c}" /><apex:inputField value="{!Bond_Offering__c.Interest_Rate__c}" />
+                
+            </apex:pageBlockSection>
+           
+            
+            <apex:pageBlockSection title="Bond Offering Progress" >
+                   
+                <apex:outputField value="{!Bond_Offering__c.Units_Sold__c}" />
+                 <apex:outputText ></apex:outputText>
+                <apex:outputField value="{!Bond_Offering__c.Units_Remaining__c}" />
+                <apex:outputText ></apex:outputText>
+                <apex:outputField value="{!Bond_Offering__c.Units_Pending__c}" />
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Bond Buys"> 
+            </apex:pageBlockSection>
+     
+        <apex:selectList size="1" value="{!BId}" >
+        <apex:selectOptions value="{!Investors_Type}"/>
+        </apex:selectList>
+   <apex:dataTable border="1" bgcolor="white" style="border-color:lightgrey" value="{!bondsDetail}" var="bonds">
+   <apex:column HeaderValue="Selected" width="150"><apex:inputCheckbox value="{!bonds.check}" /></apex:column>
+       <apex:column value="{!bonds.Unit}" width="250"/>
+     <apex:column headerValue="Status" width="175" value="{!bonds.Status}"/>
+     <apex:column headerValue="Investors Name" width="225" value="{!bonds.InvestorsName}"/>
+       <apex:column headerValue="Type" width="175" value="{!bonds.Type}"/>
+   </apex:dataTable>
+         
+         </apex:pageBlock>
+ 
+    </apex:form>
+</apex:page>
